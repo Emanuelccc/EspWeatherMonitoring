@@ -1,4 +1,4 @@
-## Weather Monitoring 
+### Weather Monitoring 
 # Introduction
 A menu-driven weather station powered by an ESP32S3 microcontroller, sharing live environmental data through the use of a BMP280 sensor, graphical display ST7789 TFT, and a JOYSTICK CONTROLLER for physical navigation.
 # Hardware specifications & pinout 
