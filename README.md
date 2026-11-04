@@ -10,8 +10,8 @@ A menu-driven weather station powered by an ESP32S3 microcontroller, sharing liv
 - 'Adafruit ST7789 Library'
 - 'Adafruit BMP280 Library'
 ## Project Steps
-- TFT Display: Setup and verify communicatioin.
+- TFT Display: Setup and verify communicatioin.(tested)
 - BMP280 Sensor: Interface the BMP280 sensor via I2C for real time pressure and temperature.
-- Joystick: Read analog for coordinates and digital for the click iplementation.
+- Joystick: Read analog for coordinates and digital for the click iplementation.(tested)
 - Menu system: Make the menu panel and enable navigation between options.
 - Schematic and PCB: Translate the breadboard prototype into a printed circuit board. 
