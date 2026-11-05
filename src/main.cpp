@@ -1,28 +1,27 @@
-#include <Adafruit_GFX.h>
-#include <Adafruit_ST7789.h>
-#include <Adafruit_BMP280.h>
-#include <Wire.h>
-#include <SPI.h>
+#include <Arduino.h>
 
-// --- DISPLAY PINS ---
-#define TFT_CS   4
-#define TFT_DC   5
-#define TFT_RST  6
-
-Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
+#define JOYS_Y 14
+#define JOY_SW 13
 
 void setup() {
   Serial.begin(115200);
-
-  tft.init(240, 320);
-  tft.setRotation(0);
-  tft.fillScreen(ST77XX_BLACK);
-  tft.setTextColor(ST77XX_WHITE);
-  tft.setTextSize(2);
-  tft.setCursor(45, 150);
-  tft.println("Hello, World!");
+  pinMode(JOYS_Y, INPUT);
+  pinMode(JOY_SW, INPUT_PULLUP); // Internal pull-up for button click
 }
 
 void loop() {
+  int yValue = analogRead(JOYS_Y);
+  bool swState = digitalRead(JOY_SW);
   
+  if (swState == LOW) {
+    Serial.println("Button Pressed!");
+  } else {
+    Serial.println("Button Released!");
+  }
+  if (yValue < 1000) {
+    Serial.println("Joystick moved up");
+  } else if (yValue > 3000) {
+    Serial.println("Joystick moved down");
+  }
+  delay(200);
 }
