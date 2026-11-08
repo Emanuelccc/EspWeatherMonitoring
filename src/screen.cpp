@@ -73,30 +73,43 @@ tft.drawRGBBitmap(0,0, canvas.getBuffer(),240, 320); // Draw the canvas to the d
 //void showData(int state, float value) {
  void drawPage(int state, float value) { 
 
-tft.fillScreen(ST77XX_BLACK);
+canvas.fillScreen(ST77XX_BLACK);
 
-  tft.setCursor(20, 30);
-  tft.setTextSize(2);
-  tft.setTextColor(ST77XX_GREEN);
-  tft.print("WEATHER STATION");
+  canvas.setCursor(20, 30);
+  canvas.setTextSize(2);
+  canvas.setTextColor(ST77XX_GREEN);
+  canvas.print("WEATHER STATION");
 
-  tft.setCursor(20, 110);
-  tft.setTextSize(2);
-  tft.setTextColor(ST77XX_WHITE);
+  canvas.setCursor(20, 110);
+  canvas.setTextSize(2);
+  canvas.setTextColor(ST77XX_WHITE);
   
   if (state == 3) {
-    tft.print("Temperature:");
+    canvas.print("Temperature:");
   } else {
-    tft.print("Pressure:");
+    canvas.print("Pressure:");
   }
 
-  tft.setCursor(20, 160);
-  tft.setTextSize(4);
-  tft.setTextColor(ST77XX_RED);
-  tft.print(value, 1);
+  canvas.setCursor(20, 160);
+  canvas.setTextSize(4);
+  canvas.setTextColor(ST77XX_RED);
+  canvas.print(value, 1);
 
-  tft.setCursor(20, 275);
-  tft.setTextSize(1);
-  tft.setTextColor(0x8410);
-  tft.print("Click button to return");
+  canvas.setCursor(10, 200);
+  canvas.setTextSize(2);
+  canvas.setTextColor(0x8410);
+
+if (state == 1){
+  canvas.print(" hPa");
+} else if (state == 2){
+  canvas.print(" mbar");
+} else if (state == 3){
+  canvas.print(" C"); }
+
+  canvas.setCursor(20, 275);
+  canvas.setTextSize(1);
+  canvas.setTextColor(0x8410);
+  canvas.print("Click button to return");
+
+  tft.drawRGBBitmap(0, 0, canvas.getBuffer(), 240, 320);
 }
