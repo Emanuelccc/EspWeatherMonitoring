@@ -1,22 +1,18 @@
-#include <Adafruit_GFX.h>
-#include <Adafruit_ST7789.h>
-#include <Adafruit_BMP280.h>
-#include <Wire.h>
-#include <SPI.h>
+#include <Arduino.h>
 #include "sensor.h"
 #include "screen.h"
 
-// Define the pin for the joystick Y-axis
+//The pins for the joystick Y-axis & SW 
 #define JOYS_Y 14
 #define JOY_SW 13
 
 
 int menuselect = 1;  // Variable to track the selected menu item
-int page = 0;      // PAGE NR 0-menu, 1-pressure pha, 2-pressure mbar, 3-temperature
+int page = 0;      // PAGE 0-menu, 1-pressure pha, 2-pressure mbar, 3-temperature
 
 
 void setup() {
- Serial.begin(115200);
+
 
 initDisplay();
 initSensor();
@@ -24,7 +20,7 @@ initSensor();
  pinMode(JOYS_Y, INPUT); // Set joystick Y-axis pin as input
  pinMode(JOY_SW, INPUT_PULLUP); // Set joystick switch pin as input with pull-up resistor
 
- Drawmenu(menuselect);
+ Drawmenu(menuselect);   // initially draw the main menu
 }
 
 void loop() {
@@ -37,7 +33,7 @@ if(button == LOW){
 } else {
  page = 0; // Return to the main menu
  Drawmenu(menuselect);
-}delay(200);
+}delay(200);    
 }
 // Main Menu logic
 if (page == 0) {
@@ -60,7 +56,7 @@ else if (val_y < 1000){
 
 } 
  
-} else {
+} else { // = if page != 0 if a page is selected, then read values. 
     float val = 0.0;
     if (page == 3) {
       val = readTemp();

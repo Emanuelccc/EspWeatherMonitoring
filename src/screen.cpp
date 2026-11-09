@@ -1,19 +1,18 @@
 #include <Arduino.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_ST7789.h>
-#include <SPI.h>
 #include "screen.h"
 
-Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
-GFXcanvas16 canvas(240, 320); // Create a canvas for drawing
+Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST); // initialisze the display 
+GFXcanvas16 canvas(240, 320); // Create a canvas for drawing 
 
-
+// Initialize the TFT display
 void initDisplay() {
   tft.init(240, 320);
   tft.setRotation(0);
   tft.fillScreen(ST77XX_BLACK);
 }
-
+// Draw the main menu on the display
 void Drawmenu( int ms){
 canvas.fillScreen(ST77XX_BLACK);
 
@@ -27,7 +26,7 @@ canvas.fillScreen(ST77XX_BLACK);
     canvas.setTextColor(0x8410); 
     canvas.setTextSize(1);
     canvas.print("ESP32-S3 Weather System");
-
+// if first option selected highlight it in red, otherwise keep it white
  if (ms == 1) {
 canvas.drawRect(20, 95, 200, 45, ST77XX_RED); // Draw a rectangle around the text
 canvas.setTextColor(ST77XX_RED); // Highlight selected menu item in red
@@ -40,22 +39,22 @@ canvas.setTextColor(ST77XX_RED); // Highlight selected menu item in red
  canvas.println("Pressure (hPa)");
 
  if (ms == 2) {
-canvas.drawRect(20, 155, 200, 45, ST77XX_RED); // Draw a rectangle around the text
-canvas.setTextColor(ST77XX_RED); // Highlight selected menu item in red
+canvas.drawRect(20, 155, 200, 45, ST77XX_RED); 
+canvas.setTextColor(ST77XX_RED); 
 } else {
-canvas.drawRect(20, 155, 200, 45, ST77XX_WHITE); // Draw a rectangle around the text;
-canvas.setTextColor(ST77XX_WHITE); // Non-selected items in white
+canvas.drawRect(20, 155, 200, 45, ST77XX_WHITE); 
+canvas.setTextColor(ST77XX_WHITE); 
  }
 canvas.setCursor(30, 170);
  canvas.setTextSize(2);
  canvas.println("Pressure (mbar)");
 
 if (ms == 3) {
-canvas.drawRect(20, 215, 200, 45, ST77XX_RED); // Draw a rectangle around the text
-canvas.setTextColor(ST77XX_RED); // Highlight selected menu item in red
+canvas.drawRect(20, 215, 200, 45, ST77XX_RED); 
+canvas.setTextColor(ST77XX_RED); 
  } else {
- canvas.drawRect(20, 215, 200, 45, ST77XX_WHITE); // Draw a rectangle around the text;
- canvas.setTextColor(ST77XX_WHITE); // Non-selected items in white
+ canvas.drawRect(20, 215, 200, 45, ST77XX_WHITE); 
+ canvas.setTextColor(ST77XX_WHITE); 
  }
  canvas.setCursor(30, 230);
  canvas.setTextSize(2);
@@ -70,9 +69,9 @@ canvas.setTextColor(ST77XX_RED); // Highlight selected menu item in red
 tft.drawRGBBitmap(0,0, canvas.getBuffer(),240, 320); // Draw the canvas to the display
 }
 
-//void showData(int state, float value) {
+// Draw the selected page with the sensor value
  void drawPage(int state, float value) { 
-
+// clear the previous content on the canvas
 canvas.fillScreen(ST77XX_BLACK);
 
   canvas.setCursor(20, 30);
